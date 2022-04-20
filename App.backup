@@ -1,0 +1,145 @@
+import {
+  StyleSheet,
+  Text,
+  View,
+  Image,
+  Dimensions,
+  FlatList,
+} from 'react-native';
+import React, {useEffect, useState} from 'react';
+import SkeletonPlaceholder from 'react-native-skeleton-placeholder';
+
+const App = () => {
+  let imageUrl = 'https://source.unsplash.com/random/900×700/?porn ';
+  const [skelton, setSkleton] = useState(true);
+  useEffect(() => {
+    setTimeout(() => {
+      setSkleton(false);
+    }, 3000);
+  });
+  const data = [1, 2, 3, 4, 5];
+  const renderItem = ({item}) => {
+    console.log(item);
+    return (
+      <View style={{alignItems: 'center'}}>
+        <View
+          style={{
+            display: skelton ? 'flex' : 'none',
+          }}>
+          <SkeletonPlaceholder
+            //  backgroundColor="#00f"
+            speed={850}>
+            <SkeletonPlaceholder.Item
+              height={Dimensions.get('screen').height * 0.25}
+              width={Dimensions.get('screen').width * 0.9}
+              borderRadius={20}
+              margin={5}
+              borderWidth={1}
+              padding={10}>
+              <SkeletonPlaceholder.Item
+                height={70}
+                width={70}
+                borderRadius={70}
+              />
+              <SkeletonPlaceholder.Item
+                height={25}
+                width={250}
+                borderRadius={4}
+                margin={5}
+              />
+              <SkeletonPlaceholder.Item
+                height={25}
+                width={250}
+                borderRadius={4}
+                margin={5}
+              />
+              <SkeletonPlaceholder.Item
+                height={25}
+                width={250}
+                borderRadius={4}
+                margin={5}
+              />
+            </SkeletonPlaceholder.Item>
+          </SkeletonPlaceholder>
+        </View>
+        <View
+          style={{
+            height: Dimensions.get('screen').height * 0.25,
+            width: Dimensions.get('screen').width * 0.9,
+            elevation: 5,
+            backgroundColor: '#00f',
+            borderRadius: 20,
+            padding: 10,
+            display: skelton ? 'none' : 'flex',
+            margin: 5,
+          }}>
+          <Image
+            source={{
+              uri: imageUrl,
+            }}
+            style={{
+              height: 70,
+              width: 70,
+              borderRadius: 70,
+            }}
+          />
+          <Text
+            style={{
+              fontFamily: 'cursive',
+              fontSize: 30,
+              fontWeight: 'bold',
+              color: '#fff',
+            }}>
+            Johnny Reese
+          </Text>
+          <Text
+            style={{
+              fontFamily: 'monospace',
+              fontSize: 20,
+              fontWeight: 'bold',
+              color: '#fff',
+              textTransform: 'capitalize',
+            }}>
+            wall ,Johnny , Reese
+          </Text>
+          <Text
+            style={{
+              fontFamily: 'monospace',
+              fontSize: 20,
+              fontWeight: 'bold',
+              color: '#fff',
+              textTransform: 'lowercase',
+            }}>
+            unibikbe@rew.gs
+          </Text>
+          <Text
+            style={{
+              fontFamily: 'monospace',
+              fontSize: 20,
+              fontWeight: 'bold',
+              color: '#fff',
+              textTransform: 'lowercase',
+            }}>
+            118.45.166.236
+          </Text>
+        </View>
+      </View>
+    );
+  };
+  return (
+    <View
+      style={
+        {
+          // alignItems: 'center',
+          // justifyContent: 'center',
+          // flex: 1,
+        }
+      }>
+      <FlatList data={data} renderItem={renderItem} />
+    </View>
+  );
+};
+
+export default App;
+
+const styles = StyleSheet.create({});
