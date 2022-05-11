@@ -5,3 +5,8 @@ import axios from '../axios';
 export const allCatagory = () => {
   return axios.get('/products/categories');
 };
+// * Get All Catagory
+
+export const allProducts = () => {
+  return axios.get('/products');
+};

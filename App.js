@@ -1,22 +1,34 @@
-import {StyleSheet, StatusBar} from 'react-native';
-import React from 'react';
+import {StyleSheet, StatusBar, LogBox} from 'react-native';
+import React, {useEffect} from 'react';
 import {NavigationContainer} from '@react-navigation/native';
-import {Provider} from 'react-redux';
-import Home from './src/screens/Home';
-import {store} from './src/redux/store';
+import {useDispatch, useSelector} from 'react-redux';
+import {
+  getAllCategories,
+  getAllItems,
+  getTokenAction,
+} from './src/redux/actions';
+import MainStack from './src/navigations/MainStack';
 
 const App = () => {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getAllCategories());
+    dispatch(getAllItems());
+    setTimeout(() => {
+      dispatch(getTokenAction());
+    }, 3000);
+  }, []);
+  LogBox.ignoreAllLogs();
+  const listReducer = useSelector(state => state.ListReducer);
   return (
-    <Provider store={store}>
-      <NavigationContainer>
-        <StatusBar
-          translucent
-          backgroundColor={'transparent'}
-          barStyle="dark-content"
-        />
-        <Home />
-      </NavigationContainer>
-    </Provider>
+    <NavigationContainer>
+      <StatusBar
+        translucent
+        backgroundColor={'transparent'}
+        barStyle="dark-content"
+      />
+      <MainStack />
+    </NavigationContainer>
   );
 };
 
