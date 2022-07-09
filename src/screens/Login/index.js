@@ -3,16 +3,16 @@ import React, {useState} from 'react';
 import {Input, Icon, Button} from 'react-native-magnus';
 import {useNavigation} from '@react-navigation/native';
 import Pressable from 'react-native/Libraries/Components/Pressable/Pressable';
-import {useDispatch, useSelector} from 'react-redux';
-import {getSignin} from '../../redux/actions';
+// import {useDispatch, useSelector} from 'react-redux';
+// import {getSignin} from '../../redux/actions';
 import Loader from '../../components/Loader';
 
 const Login = () => {
   const [username, setusername] = useState('');
   const [password, setpassword] = useState('');
   const navigation = useNavigation();
-  const dispatch = useDispatch();
-  const AuthReducer = useSelector(state => state.AuthReducer);
+  // const dispatch = useDispatch();
+  // const AuthReducer = useSelector(state => state.AuthReducer);
   return (
     <View
       style={{
@@ -88,7 +88,9 @@ const Login = () => {
         }}
       />
       <Button
-        onPress={() => dispatch(getSignin({username, password}))}
+        onPress={() => {
+          navigation.navigate('Home');
+        }}
         // w={'90%'}
         h={50}
         alignSelf="center"
@@ -102,7 +104,24 @@ const Login = () => {
         underlayColor="red100">
         Login
       </Button>
-      <Loader visible={AuthReducer.loader} />
+      <Button
+        onPress={() => {
+          navigation.navigate('SignUp');
+        }}
+        // w={'90%'}
+        h={50}
+        alignSelf="center"
+        m={20}
+        px="xl"
+        py="lg"
+        bg="blue"
+        borderWidth={1}
+        borderColor="#0C1A30"
+        color="#fff"
+        underlayColor="red100">
+        Goto Signup Page
+      </Button>
+      <Loader visible={false} />
     </View>
   );
 };

@@ -2,24 +2,19 @@ import {StyleSheet, StatusBar, LogBox} from 'react-native';
 import React, {useEffect} from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {useDispatch, useSelector} from 'react-redux';
-import {
-  getAllCategories,
-  getAllItems,
-  getTokenAction,
-} from './src/redux/actions';
 import MainStack from './src/navigations/MainStack';
+import {getTokenRequest} from './src/redux/reducers/AuthReducer';
 
 const App = () => {
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(getAllCategories());
-    dispatch(getAllItems());
     setTimeout(() => {
-      dispatch(getTokenAction());
+      dispatch(getTokenRequest());
     }, 3000);
   }, []);
   LogBox.ignoreAllLogs();
-  const listReducer = useSelector(state => state.ListReducer);
+  const AuthReducer = useSelector(state => state.AuthReducer);
+  console.log('AuthR', AuthReducer);
   return (
     <NavigationContainer>
       <StatusBar

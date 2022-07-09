@@ -12,24 +12,15 @@ import {
   Overlay,
   Icon,
 } from 'react-native-magnus';
-import {allCatagory, allProducts} from '../../apis/products';
 import {randomImageUrl} from '../../helper/constants';
 const demoCatagory = [1, 2, 3, 4, 5];
-import {useSelector, useDispatch} from 'react-redux';
-import {getAllItems} from '../../redux/actions';
 import Loader from '../../components/Loader';
 
 const Home = () => {
   const [all, setall] = React.useState([]);
   const [allProduct, setallProducts] = React.useState([]);
   const [overlayVisible, setoverlayVisible] = React.useState(false);
-  const allData = useSelector(state => state.ListReducer);
-  console.log('allData', allData);
-  const dispatch = useDispatch();
-  useEffect(() => {
-    setall(allData.categoriesRes);
-    setallProducts(allData.allItemsRes);
-  }, [allData]);
+
   const randomIndex = Math.floor(Math.random() * allProduct.length);
   return (
     <ScrollDiv
@@ -38,7 +29,7 @@ const Home = () => {
         backgroundColor: '#fff',
       }}>
       <HomeHeader />
-      <Loader visible={allData.loader} />
+      <Loader visible={false} />
       {/* Search */}
       <Pressable
         onPress={() => {
@@ -69,7 +60,7 @@ const Home = () => {
           resizeMode="contain"
         />
       </Pressable>
-      {/* <Slideing /> */}
+      <Slideing />
       {/* Skeleton-1 */}
       <Div
         h={150}
